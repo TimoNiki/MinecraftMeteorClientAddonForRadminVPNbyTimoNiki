@@ -13,7 +13,7 @@ import net.minecraft.util.math.Vec3d;
 
 public class TntGrief extends Module {
     public TntGrief() {
-        super(Categories.Misc, "tnt-grief", "Ставит и поджигает ТНТ под вами (выдает вещи в 1 и 2 слот).");
+        super(my.meteor.addon.Addon.CATEGORY, "tnt-grief", "Ставит и поджигает ТНТ под вами (выдает вещи в 1 и 2 слот).");
     }
 
     @EventHandler

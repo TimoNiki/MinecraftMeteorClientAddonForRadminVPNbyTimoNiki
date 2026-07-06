@@ -8,7 +8,7 @@ import net.minecraft.world.GameMode;
 
 public class ForceCreative extends Module {
     public ForceCreative() {
-        super(Categories.Misc, "force-creative", "Выдает ГМ 1 всем игрокам, кроме вас и хоста.");
+        super(my.meteor.addon.Addon.CATEGORY, "force-creative", "Выдает ГМ 1 всем игрокам, кроме вас и хоста.");
     }
 
     @EventHandler

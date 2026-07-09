@@ -1,6 +1,8 @@
 plugins {
-    alias(libs.plugins.fabric.loom)
-}
+    id("fabric-loom") version "1.7.4"
+ }
+
+
 
 base {
     archivesName = properties["archives_base_name"] as String
@@ -21,8 +23,10 @@ repositories {
 
 dependencies {
     // Fabric
-    minecraft(libs.minecraft)
+    minecraft("com.mojang:minecraft:1.21.11")
     implementation(libs.fabric.loader)
+
+     mappings(loom.officialMojangMappings())
 
     // Meteor
     implementation(libs.meteor.client)
@@ -30,7 +34,7 @@ dependencies {
 
 java {
     toolchain {
-        languageVersion.set(JavaLanguageVersion.of(libs.versions.jdk.get().toInt()))
+        languageVersion.set(JavaLanguageVersion.of(21))
     }
 }
 
@@ -47,8 +51,8 @@ tasks {
     processResources {
         val propertyMap = mapOf(
             "version" to project.version,
-            "minecraft_version" to toMinecraftCompat(libs.versions.minecraft.get()),
-            "jdk_version" to libs.versions.jdk.get(),
+            "minecraft_version" to libs.versions.minecraft.get(),
+            "jdk_version" to libs.versions.jdk.get()
         )
 
         inputs.properties(propertyMap)
@@ -58,13 +62,15 @@ tasks {
     }
 
     jar {
-        inputs.property("archivesName", project.base.archivesName.get())
+        val archivesName = project.base.archivesName.get()
+        inputs.property("archivesName", archivesName)
 
         from("LICENSE") {
-            rename { "${it}_${inputs.properties["archivesName"]}" }
+            rename { "${it}_${archivesName}" }
         }
     }
 
+    // 3. Настройка параметров компиляции Java
     withType<JavaCompile>().configureEach {
         options.compilerArgs.addAll(
             listOf(

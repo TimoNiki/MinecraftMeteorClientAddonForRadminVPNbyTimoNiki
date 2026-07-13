@@ -14,7 +14,6 @@ public class AntiMobRun extends Module {
     private Vec3 escapeTarget = null;
 
     public AntiMobRun() {
-        // Подключаем к вашей кастомной категории из главного класса AddonTemplate
         super(my.meteor.addon.AddonTemplate.CATEGORY, "anti-mob-run", "Автоматически убегает от враждебных мобов в радиусе 8 блоков и перепрыгивает препятствия.");
     }
 
